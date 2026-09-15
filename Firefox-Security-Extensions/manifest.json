@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "Firefox Security & Miner Blocker",
+  "version": "1.0.0",
+  "description": "Blocks known malicious domains, cryptominers, tracking requests, and unwanted third-party network requests.",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "security-miner-blocker@example.local"
+    }
+  }
+}
