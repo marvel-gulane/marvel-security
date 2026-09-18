@@ -1,0 +1,12 @@
+# With built-in defaults
+node adblock.js --port 8080
+
+# With EasyList
+node adblock.js --port 8080 --blocklist ./blocklist.txt --stats
+
+# Check stats
+curl http://localhost:8081/stats
+
+gsettings set org.gnome.system.proxy mode 'manual'
+gsettings set org.gnome.system.proxy.http host '127.0.0.1'
+gsettings set org.gnome.system.proxy.http port 8080   
