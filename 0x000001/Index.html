@@ -1,0 +1,107 @@
+<!-- Generator: GNU source-highlight 3.1.9
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900">/* This Source Code Form is subject to the terms of the Mozilla Public</font></i>
+<i><font color="#9A1900"> * License, v. 2.0. If a copy of the MPL was not distributed with this</font></i>
+<i><font color="#9A1900"> * file, You can obtain one at </font></i><u><font color="#0000FF">http://mozilla.org/MPL/2.0/.</font></u><i><font color="#9A1900"> */</font></i>
+<style>body{ background-color:pink; color:black;}</style>
+<b><font color="#0000FF">const</font></b> lazy <font color="#990000">=</font> <font color="#FF0000">{}</font><font color="#990000">;</font>
+
+ChromeUtils<font color="#990000">.</font><b><font color="#000000">defineESModuleGetters</font></b><font color="#990000">(</font>lazy<font color="#990000">,</font> <font color="#FF0000">{</font>
+  getSeenNodesForBrowsingContext<font color="#990000">:</font>
+    <font color="#FF0000">"chrome://remote/content/shared/webdriver/Session.sys.mjs"</font><font color="#990000">,</font>
+  TabManager<font color="#990000">:</font> <font color="#FF0000">"chrome://remote/content/shared/TabManager.sys.mjs"</font><font color="#990000">,</font>
+<font color="#FF0000">}</font><font color="#990000">);</font>
+
+<i><font color="#9A1900">/**</font></i>
+<i><font color="#9A1900"> * The serialization of JavaScript objects in the content process might produce</font></i>
+<i><font color="#9A1900"> * extra data that needs to be transfered and then processed by the parent</font></i>
+<i><font color="#9A1900"> * process. This extra data is part of the payload as returned by commands</font></i>
+<i><font color="#9A1900"> * and events and can contain the following:</font></i>
+<i><font color="#9A1900"> *</font></i>
+<i><font color="#9A1900"> *     - {Map</font></i><b><font color="#0000FF">&lt;BrowsingContext</font></b>, <font color="#009900">Array</font>&lt;<font color="#009900">string</font><b><font color="#0000FF">&gt;</font></b><i><font color="#9A1900">&gt;} seenNodeIds</font></i>
+<i><font color="#9A1900"> *         DOM nodes that need to be added to the navigable seen nodes map.</font></i>
+<i><font color="#9A1900"> *</font></i>
+<i><font color="#9A1900"> * </font></i><font color="#009900">@param</font><i><font color="#9A1900"> {string} sessionId</font></i>
+<i><font color="#9A1900"> *     Id of the WebDriver session</font></i>
+<i><font color="#9A1900"> * </font></i><font color="#009900">@param</font><i><font color="#9A1900"> {object} payload</font></i>
+<i><font color="#9A1900"> *     Payload of the response for the command and event that might contain</font></i>
+<i><font color="#9A1900"> *     a `_extraData` field.</font></i>
+<i><font color="#9A1900"> *</font></i>
+<i><font color="#9A1900"> * </font></i><font color="#009900">@returns</font><i><font color="#9A1900"> {object}</font></i>
+<i><font color="#9A1900"> *     The payload with the extra data removed if it was present.</font></i>
+<i><font color="#9A1900"> */</font></i>
+export <font color="#008080">function</font> <b><font color="#000000">processExtraData</font></b><font color="#990000">(</font>sessionId<font color="#990000">,</font> payload<font color="#990000">)</font> <font color="#FF0000">{</font>
+  <i><font color="#9A1900">// Process extra data if present and delete it from the payload</font></i>
+  <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><font color="#FF0000">"_extraData"</font> <font color="#008080">in</font> payload<font color="#990000">)</font> <font color="#FF0000">{</font>
+    <b><font color="#0000FF">const</font></b> <font color="#FF0000">{</font> seenNodeIds <font color="#FF0000">}</font> <font color="#990000">=</font> payload<font color="#990000">.</font>_extraData<font color="#990000">;</font>
+
+    <i><font color="#9A1900">// Updates the seen nodes for the current session and browsing context.</font></i>
+    seenNodeIds<font color="#990000">?.</font><b><font color="#000000">forEach</font></b><font color="#990000">((</font>nodeIds<font color="#990000">,</font> browsingContext<font color="#990000">)</font> <font color="#990000">=&gt;</font> <font color="#FF0000">{</font>
+      <b><font color="#0000FF">const</font></b> seenNodes <font color="#990000">=</font> lazy<font color="#990000">.</font><b><font color="#000000">getSeenNodesForBrowsingContext</font></b><font color="#990000">(</font>
+        sessionId<font color="#990000">,</font>
+        browsingContext
+      <font color="#990000">);</font>
+
+      nodeIds<font color="#990000">.</font><b><font color="#000000">forEach</font></b><font color="#990000">(</font>nodeId <font color="#990000">=&gt;</font> seenNodes<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font>nodeId<font color="#990000">));</font>
+    <font color="#FF0000">}</font><font color="#990000">);</font>
+
+    <font color="#008080">delete</font> payload<font color="#990000">.</font>_extraData<font color="#990000">;</font>
+  <font color="#FF0000">}</font>
+
+  <i><font color="#9A1900">// Find serialized WindowProxy and resolve browsing context to a navigable id.</font></i>
+  <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>payload<font color="#990000">?.</font>result<font color="#990000">)</font> <font color="#FF0000">{</font>
+    payload<font color="#990000">.</font>result <font color="#990000">=</font> <b><font color="#000000">addContextIdToSerializedWindow</font></b><font color="#990000">(</font>payload<font color="#990000">.</font>result<font color="#990000">);</font>
+  <font color="#FF0000">}</font> <b><font color="#0000FF">else</font></b> <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>payload<font color="#990000">.</font>exceptionDetails<font color="#990000">)</font> <font color="#FF0000">{</font>
+    payload<font color="#990000">.</font>exceptionDetails <font color="#990000">=</font> <b><font color="#000000">addContextIdToSerializedWindow</font></b><font color="#990000">(</font>
+      payload<font color="#990000">.</font>exceptionDetails
+    <font color="#990000">);</font>
+  <font color="#FF0000">}</font>
+
+  <b><font color="#0000FF">return</font></b> payload<font color="#990000">;</font>
+<font color="#FF0000">}</font>
+
+<font color="#008080">function</font> <b><font color="#000000">addContextIdToSerializedWindow</font></b><font color="#990000">(</font>serialized<font color="#990000">)</font> <font color="#FF0000">{</font>
+  <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>serialized<font color="#990000">.</font>value<font color="#990000">)</font> <font color="#FF0000">{</font>
+    <b><font color="#0000FF">switch</font></b> <font color="#990000">(</font>serialized<font color="#990000">.</font>type<font color="#990000">)</font> <font color="#FF0000">{</font>
+      <b><font color="#0000FF">case</font></b> <font color="#FF0000">"array"</font><font color="#990000">:</font>
+      <b><font color="#0000FF">case</font></b> <font color="#FF0000">"htmlcollection"</font><font color="#990000">:</font>
+      <b><font color="#0000FF">case</font></b> <font color="#FF0000">"nodelist"</font><font color="#990000">:</font>
+      <b><font color="#0000FF">case</font></b> <font color="#FF0000">"set"</font><font color="#990000">:</font> <font color="#FF0000">{</font>
+        serialized<font color="#990000">.</font>value <font color="#990000">=</font> serialized<font color="#990000">.</font>value<font color="#990000">.</font><b><font color="#000000">map</font></b><font color="#990000">(</font>value <font color="#990000">=&gt;</font>
+          <b><font color="#000000">addContextIdToSerializedWindow</font></b><font color="#990000">(</font>value<font color="#990000">)</font>
+        <font color="#990000">);</font>
+        <b><font color="#0000FF">break</font></b><font color="#990000">;</font>
+      <font color="#FF0000">}</font>
+
+      <b><font color="#0000FF">case</font></b> <font color="#FF0000">"map"</font><font color="#990000">:</font>
+      <b><font color="#0000FF">case</font></b> <font color="#FF0000">"object"</font><font color="#990000">:</font> <font color="#FF0000">{</font>
+        serialized<font color="#990000">.</font>value <font color="#990000">=</font> serialized<font color="#990000">.</font>value<font color="#990000">.</font><b><font color="#000000">map</font></b><font color="#990000">(([</font>key<font color="#990000">,</font> value<font color="#990000">])</font> <font color="#990000">=&gt;</font> <font color="#990000">[</font>
+          key<font color="#990000">,</font>
+          <b><font color="#000000">addContextIdToSerializedWindow</font></b><font color="#990000">(</font>value<font color="#990000">),</font>
+        <font color="#990000">]);</font>
+        <b><font color="#0000FF">break</font></b><font color="#990000">;</font>
+      <font color="#FF0000">}</font>
+
+      <b><font color="#0000FF">case</font></b> <font color="#FF0000">"window"</font><font color="#990000">:</font> <font color="#FF0000">{</font>
+        <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>serialized<font color="#990000">.</font>value<font color="#990000">.</font>isTopBrowsingContext<font color="#990000">)</font> <font color="#FF0000">{</font>
+          <b><font color="#0000FF">const</font></b> browsingContext <font color="#990000">=</font> BrowsingContext<font color="#990000">.</font><b><font color="#000000">getCurrentTopByBrowserId</font></b><font color="#990000">(</font>
+            serialized<font color="#990000">.</font>value<font color="#990000">.</font>context
+          <font color="#990000">);</font>
+
+          serialized<font color="#990000">.</font>value <font color="#990000">=</font> <font color="#FF0000">{</font>
+            context<font color="#990000">:</font> lazy<font color="#990000">.</font>TabManager<font color="#990000">.</font><b><font color="#000000">getIdForBrowsingContext</font></b><font color="#990000">(</font>browsingContext<font color="#990000">),</font>
+          <font color="#FF0000">}</font><font color="#990000">;</font>
+        <font color="#FF0000">}</font>
+        <b><font color="#0000FF">break</font></b><font color="#990000">;</font>
+      <font color="#FF0000">}</font>
+    <font color="#FF0000">}</font>
+  <font color="#FF0000">}</font> <b><font color="#0000FF">else</font></b> <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>serialized<font color="#990000">.</font>exception<font color="#990000">)</font> <font color="#FF0000">{</font>
+    serialized<font color="#990000">.</font>exception <font color="#990000">=</font> <b><font color="#000000">addContextIdToSerializedWindow</font></b><font color="#990000">(</font>serialized<font color="#990000">.</font>exception<font color="#990000">);</font>
+  <font color="#FF0000">}</font>
+
+  <b><font color="#0000FF">return</font></b> serialized<font color="#990000">;</font>
+<font color="#FF0000">}</font>
+
+</tt></pre>
