@@ -8,7 +8,7 @@ const { exec, spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const PORT = 8443;
+const PORT = 8100;
 const TOOLS = {
   nmap:      { label: 'Nmap',      desc: 'Port / service scan',      cmd: 'nmap' },
   nikto:     { label: 'Nikto',     desc: 'Web server vuln scan',     cmd: 'nikto' },
@@ -22,6 +22,7 @@ const TOOLS = {
   gobuster:  { label: 'Gobuster',  desc: 'Directory / DNS brute',   cmd: 'gobuster' },
   nuclei:    { label: 'Nuclei',    desc: 'Template-based scanner',  cmd: 'nuclei' },
   testssl:   { label: 'testssl.sh',desc: 'SSL/TLS audit',           cmd: 'testssl.sh' },
+  chkrootkit: { label: 'chkrootkit', desc: 'Detection / Configuration', cmd: 'chkrootkit',},
 };
 
 // Track running processes
