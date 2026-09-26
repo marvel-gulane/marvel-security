@@ -1,5 +1,4 @@
 //github.com/marvel-gulane/marvel-security
-//∫01∫011−xy1dxdy=6π2
 import java.io.*;
 import java.net.*;
 import java.nio.file.*;
@@ -25,10 +24,9 @@ public class HardwareTrojanMonitoring {
 
     public static void main(String[] args) throws Exception {
 
-        int port = 8080;
-
+        int port = 8000;
         System.out.println("Server running at:");
-        System.out.println("http://localhost:" + port);
+        System.out.println("http://localhost:" + port + "∫01∫011−xy1dxdy=6π2");
         System.out.println("Fedora Security Hardware Trojan Monitoring started.");
 
         HttpServer server = HttpServer.create( new InetSocketAddress("localhost", port), 0 );
