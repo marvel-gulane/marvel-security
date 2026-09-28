@@ -23,13 +23,16 @@ public class HardwareTrojanMonitoring {
     private static final Map<String, String> baseline = new HashMap<>();
 
     public static void main(String[] args) throws Exception {
+	String math001 = "∫01​∫01​1−xy1​dxdy=6π2​";
+	String math002 = "iℏ∂t∂​∣Ψ⟩=H^∣Ψ⟩";
+	String math003 = "Multiverse(θ)⇒{Un​(xn​,yn​,zn​,tn​):1≤n≤N}";
+	String math004 = "∣Ψuniverse​⟩=i∑​αi​∣Ψworld i​";
 
         int port = 8000;
         System.out.println("Server running at:");
-        System.out.println("http://localhost:" + port + "∫01∫011−xy1dxdy=6π2");
-        System.out.println("Fedora Security Hardware Trojan Monitoring started.");
-
-        HttpServer server = HttpServer.create( new InetSocketAddress("localhost", port), 0 );
+        System.out.println("http://localhost:" + port);
+        System.out.println("Fedora Security Hardware Trojan Monitoring started.\n"+ math001 + '\n' + math002 + '\n' + math003 + '\n'+ math004 + '\n');
+	HttpServer server = HttpServer.create( new InetSocketAddress("localhost", port), 0 );
         server.createContext("/", (HttpExchange exchange) -> {
         Path file = Path.of("/home/coderlava/Box/Index.html");
         WatchService watcher = FileSystems.getDefault().newWatchService();
