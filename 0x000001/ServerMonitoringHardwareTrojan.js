@@ -134,7 +134,7 @@ async function scanFiles() {
 
             alert(
                 "FILE_MODIFIED",
-                `${file}\nSHA256 changed`
+                `${file} SHA256 changed`
             );
         }
     }
