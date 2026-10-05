@@ -28,7 +28,7 @@ public class HardwareTrojanMonitoring {
 	String math003 = "Multiverse(θ)⇒{Un​(xn​,yn​,zn​,tn​):1≤n≤N}";
 	String math004 = "∣Ψuniverse​⟩=i∑​αi​∣Ψworld i​";
 
-        int port = 8000;
+        int port = 8001;
         System.out.println("Server running at:");
         System.out.println("http://localhost:" + port);
         System.out.println("Fedora Security Hardware Trojan Monitoring started.\n"+ math001 + '\n' + math002 + '\n' + math003 + '\n'+ math004 + '\n');
