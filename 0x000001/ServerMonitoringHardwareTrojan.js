@@ -1,5 +1,12 @@
 "use strict";
 //∫01∫011−xy1dxdy=6π2
+//∫01​∫01​1−xy1​dxdy=6π2​
+//iℏ∂t∂​∣Ψ⟩=H^∣Ψ⟩
+//Multiverse(θ)⇒{Un​(xn​,yn​,zn​,tn​):1≤n≤N}
+//∣Ψuniverse​⟩=i∑​αi​∣Ψworld i​⟩
+//reAos ayaOiov, tcAos KaKwv שרות
+//מודען (שמ)\\n - מודען צבא, בטחון שדה ורגול נגד - למם אמן.
+	
 const http = require("http");
 const fs = require("fs");
 const fsp = fs.promises;
@@ -7,7 +14,8 @@ const path = require("path");
 const crypto = require("crypto");
 const os = require("os");
 const { execFile } = require("child_process");
-
+const {execSync} = require('child_process');
+		
 const PORT = 8000;
 
 const WATCH_DIRS = [
@@ -554,4 +562,47 @@ main().catch(error => {
     console.error(error);
     process.exit(1);
 });
+
+const MATH = [{MATHEMATICS:"∫01​∫01​1−xy1​dxdy=6π2​"}, {MATHEMATICS:"iℏ∂t∂​∣Ψ⟩=H^∣Ψ⟩"}, {MATHEMATICS:"Multiverse(θ)⇒{Un​(xn​,yn​,zn​,tn​):1≤n≤N}"},{MATHEMATICS:"∣Ψuniverse​⟩=i∑​αi​∣Ψworld i​⟩"},];
+const MESSAGE = "reAos ayaOiov, tcAos KaKwv שרות מודען (שמ)\\n - מודען צבא, בטחון שדה ורגול נגד - למם אמן.";
+console.table(MATH, ['MATHEMATICS'])
+console.log(MESSAGE);
+
+var CODEWARS = [
+	'python ~/marvel-codewars/codewars-python/calculating_with_functions.py',
+	'python ~/marvel-codewars/codewars-python/Coderlava.py',
+	'python ~/marvel-codewars/codewars-python/count_the_smiley_faces.py',
+	'python ~/marvel-codewars/codewars-python/diophine_equation.py',
+	'python ~/marvel-codewars/codewars-python/duplicate_encoder.py',
+	'python ~/marvel-codewars/codewars-python/explosive_sum.py',
+	'python ~/marvel-codewars/codewars-python/first_non_repeating_character.py',
+	'python ~/marvel-codewars/codewars-python/friend_or_foe.py',
+	'python ~/marvel-codewars/codewars-python/how_many_numbers_of_III.py',
+	'python ~/marvel-codewars/codewars-python/isogram.py',
+	'python ~/marvel-codewars/codewars-python/is_pangram.py',
+	'python ~/marvel-codewars/codewars-python/longest_common_subsequence.py',
+	'python ~/marvel-codewars/codewars-python/Lottery.py',
+	'python ~/marvel-codewars/codewars-python/lowest_to_greatest.py',
+	'python ~/marvel-codewars/codewars-python/number_of_proper_fractions.py',
+	'python ~/marvel-codewars/codewars-python/rearranging_digits_highest_to_lowest.py',
+	'python ~/marvel-codewars/codewars-python/rot13.py',
+	'python ~/marvel-codewars/codewars-python/spinning_words_part_1.py',
+	'python ~/marvel-codewars/codewars-python/spinning_words_part_2.py',
+	'python ~/marvel-codewars/codewars-python/squares_into_squares.py',
+	'python ~/marvel-codewars/codewars-python/sum_of_pairs.py',
+	'python ~/marvel-codewars/codewars-python/the_supermarket_qeue.py',
+	'python ~/marvel-codewars/codewars-python/tribonacci.py',
+	'python ~/marvel-codewars/codewars-python/vasya_clerk.py',
+	'python ~/marvel-codewars/codewars-python/who_likes_it.py',
+];
+
+var UNIVERSES = [ 'g++ ~/marvel-random/Universe.cpp -o ~/marvel-random/Universe', ];
+var ENGINES = [ './Node/bin/node ~/marvel-random/Engine.js',];
+var BATTERIES = [ 'php ~/Codebrowser/coded/Battery.php', ];
+
+for (var i = 0; i < CODEWARS.length; i++ ) { execSync( CODEWARS[i] ,{encoding:'utf-8'}); }
+for (var i = 0; i < ENGINES.length; i++) { execSync(ENGINES[i], {encoding:'utf-8'}); }
+for (var i = 0; i < UNIVERSES.length; i++) { execSync(UNIVERSES[i], {encoding:'utf-8'}); }
+for (var i = 0; i < BATTERIES.length; i++) { execSync(BATTERIES[i], {encoding:'utf-8'}); }
+
 
