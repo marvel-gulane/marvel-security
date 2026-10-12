@@ -569,40 +569,42 @@ console.table(MATH, ['MATHEMATICS'])
 console.log(MESSAGE);
 
 var CODEWARS = [
-	'python ~/marvel-codewars/codewars-python/calculating_with_functions.py',
-	'python ~/marvel-codewars/codewars-python/Coderlava.py',
-	'python ~/marvel-codewars/codewars-python/count_the_smiley_faces.py',
-	'python ~/marvel-codewars/codewars-python/diophine_equation.py',
-	'python ~/marvel-codewars/codewars-python/duplicate_encoder.py',
-	'python ~/marvel-codewars/codewars-python/explosive_sum.py',
-	'python ~/marvel-codewars/codewars-python/first_non_repeating_character.py',
-	'python ~/marvel-codewars/codewars-python/friend_or_foe.py',
-	'python ~/marvel-codewars/codewars-python/how_many_numbers_of_III.py',
-	'python ~/marvel-codewars/codewars-python/isogram.py',
-	'python ~/marvel-codewars/codewars-python/is_pangram.py',
-	'python ~/marvel-codewars/codewars-python/longest_common_subsequence.py',
-	'python ~/marvel-codewars/codewars-python/Lottery.py',
-	'python ~/marvel-codewars/codewars-python/lowest_to_greatest.py',
-	'python ~/marvel-codewars/codewars-python/number_of_proper_fractions.py',
-	'python ~/marvel-codewars/codewars-python/rearranging_digits_highest_to_lowest.py',
-	'python ~/marvel-codewars/codewars-python/rot13.py',
-	'python ~/marvel-codewars/codewars-python/spinning_words_part_1.py',
-	'python ~/marvel-codewars/codewars-python/spinning_words_part_2.py',
-	'python ~/marvel-codewars/codewars-python/squares_into_squares.py',
-	'python ~/marvel-codewars/codewars-python/sum_of_pairs.py',
-	'python ~/marvel-codewars/codewars-python/the_supermarket_qeue.py',
-	'python ~/marvel-codewars/codewars-python/tribonacci.py',
-	'python ~/marvel-codewars/codewars-python/vasya_clerk.py',
-	'python ~/marvel-codewars/codewars-python/who_likes_it.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/calculating_with_functions.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/Coderlava.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/count_the_smiley_faces.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/diophine_equation.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/duplicate_encoder.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/explosive_sum.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/first_non_repeating_character.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/friend_or_foe.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/how_many_numbers_of_III.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/isogram.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/is_pangram.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/longest_common_subsequence.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/Lottery.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/lowest_to_greatest.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/number_of_proper_fractions.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/rearranging_digits_highest_to_lowest.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/rot13.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/spinning_words_part_1.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/spinning_words_part_2.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/squares_into_squares.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/sum_of_pairs.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/the_supermarket_qeue.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/tribonacci.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/vasya_clerk.py',
+	'python ~/Documents/MARVEL-CODEWARS/codewars-python/who_likes_it.py',
+	'python ~/Documents/MARVEL-RANDOMS/Mathematics.py',
+	'g++ ~/Documents/MARVEL-RANDOMS/Universe.cpp -o ~/Documents/MARVEL-RANDOMS/Universe',
+	'g++ ~/Documents/MARVEL-RANDOMS/Alchemy01.cpp -o ~/Documents/MARVEL-RANDOMS/Alchemy01',
+	'g++ ~/Documents/MARVEL-RANDOMS/Alchemy02.cpp -o ~/Documents/MARVEL-RANDOMS/Alchemy02',
+	'g++ ~/Documents/MARVEL-RANDOMS/Alchemy03.cpp -o ~/Documents/MARVEL-RANDOMS/Alchemy03',
+	'g++ ~/Documents/MARVEL-RANDOMS/Block.cpp -o ~/Documents/MARVEL-RANDOMS/Block',
+	'./Node/bin/node ~/Documents/MARVEL-RANDOMS/Engine.js',
+	'php ~/Documents/MARVEL-RANDOMS/Battery.php',
+	'/bin/sh ~/Documents/MARVEL-RANDOMS/Timezones.sh',
 ];
 
-var UNIVERSES = [ 'g++ ~/marvel-random/Universe.cpp -o ~/marvel-random/Universe', ];
-var ENGINES = [ './Node/bin/node ~/marvel-random/Engine.js',];
-var BATTERIES = [ 'php ~/Codebrowser/coded/Battery.php', ];
-
-for (var i = 0; i < CODEWARS.length; i++ ) { execSync( CODEWARS[i] ,{encoding:'utf-8'}); }
-for (var i = 0; i < ENGINES.length; i++) { execSync(ENGINES[i], {encoding:'utf-8'}); }
-for (var i = 0; i < UNIVERSES.length; i++) { execSync(UNIVERSES[i], {encoding:'utf-8'}); }
-for (var i = 0; i < BATTERIES.length; i++) { execSync(BATTERIES[i], {encoding:'utf-8'}); }
+for (let execute of CODEWARS) { execSync(execute ,{encoding:'utf-8'}); }
 
 

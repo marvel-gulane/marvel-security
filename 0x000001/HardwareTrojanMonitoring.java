@@ -23,18 +23,25 @@ public class HardwareTrojanMonitoring {
     private static final Map<String, String> baseline = new HashMap<>();
 
     public static void main(String[] args) throws Exception {
-	String math001 = "∫01​∫01​1−xy1​dxdy=6π2​";
-	String math002 = "iℏ∂t∂​∣Ψ⟩=H^∣Ψ⟩";
-	String math003 = "Multiverse(θ)⇒{Un​(xn​,yn​,zn​,tn​):1≤n≤N}";
-	String math004 = "∣Ψuniverse​⟩=i∑​αi​∣Ψworld i​";
+	String M_0x40205A0250C2B956 = "∫01​∫01​1−xy1​dxdy=6π2​";
+	String M_0x402152EC0E758E6F = "iℏ∂t∂​∣Ψ⟩=H^∣Ψ⟩";
+	String M_0x40225AA2E3AF0B20 = "Multiverse(θ)⇒{Un​(xn​,yn​,zn​,tn​):1≤n≤N}";
+	String M_0x4023720820155763 = "∣Ψuniverse​⟩=i∑​αi​∣Ψworld i​";
+	String M_0x40349A0A791E127B = "reAos ayaOiov, tcAos KaKwv שרות מודען";
+
+	String[] Codes = {M_0x40349A0A791E127B, M_0x40205A0250C2B956, M_0x402152EC0E758E6F, M_0x40225AA2E3AF0B20, M_0x4023720820155763};
+	List<String> CodesLists = new ArrayList<>(Arrays.asList(Codes));
 
         int port = 8001;
+
+	System.out.println(CodesLists);
         System.out.println("Server running at:");
         System.out.println("http://localhost:" + port);
-        System.out.println("Fedora Security Hardware Trojan Monitoring started.\n"+ math001 + '\n' + math002 + '\n' + math003 + '\n'+ math004 + '\n');
+        System.out.println("Fedora Security Hardware Trojan Monitoring started.");
+
 	HttpServer server = HttpServer.create( new InetSocketAddress("localhost", port), 0 );
         server.createContext("/", (HttpExchange exchange) -> {
-        Path file = Path.of("/home/coderlava/Box/Index.html");
+        Path file = Path.of("/home/coderlava/Documents/MARVEL-BOXS/Index.html");
         WatchService watcher = FileSystems.getDefault().newWatchService();
  
         if (Files.exists(file)) {
